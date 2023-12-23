@@ -1,10 +1,8 @@
 import UIKit
 
 func isPalindrome(_ x: Int) -> Bool {
-    if String(x) == String(x).reduce("") { "\($1)" + $0 } {
-        return true
+    func checkPalindrome(_ x: Int) -> Bool {
+        return String(x) == String(x).reduce("") { "\($1)" + $0 }
     }
-    return false
+    return x < 0 || (x % 10 == 0 && x != 0) ? false : checkPalindrome(x)
 }
-
-isPalindrome(121)
