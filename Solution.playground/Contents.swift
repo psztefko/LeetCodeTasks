@@ -2,19 +2,13 @@ import UIKit
 
 
 func longestCommonPrefix(_ strings: [String]) -> String {
-    var commonPrefix = ""
-    var flag = true
-
-    strings[0].forEach { char in
-        var char = String(char)
-        if strings.allSatisfy { $0.hasPrefix(char) } {
-            commonPrefix += char
-        } else {
-            flag = false
-        }
+    guard let firstString = strings.first, !firstString.isEmpty else {
+        return ""
     }
 
-    return commonPrefix
+    return strings.dropFirst().reduce(firstString) { commonPrefix, nextString in
+        String(zip(commonPrefix, nextString).prefix(while: { $0.0 == $0.1 }).map { $0.0 })
+    }
 }
 
 longestCommonPrefix(["flower","flow","flight"])
