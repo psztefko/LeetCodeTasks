@@ -7,25 +7,20 @@
 
 import Foundation
 
-let vowels: [Character] = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+private extension Character {
+    var isVowel: Bool {
+        self == "a" || self == "e" || self == "i" || self == "o" || self == "u" ||
+        self == "A" || self == "E" || self == "I" || self == "O" || self == "U"
+    }
+}
 
 func reverseVowels(_ s: String) -> String {
-    var vowelsInString: [Character] = []
-    var vowelsIndexes: [Int] = []
-    var result = s.map { $0 }
+    var vowelsStack = s.filter(\.isVowel)
+    var result = ""
 
-    for (index, char) in s.enumerated() {
-        if vowels.contains(char) {
-            vowelsInString.append(char)
-            vowelsIndexes.append(index)
-        }
-    }
-
-    for (i, vowel) in vowelsIndexes.enumerated() {
-        result[vowelsIndexes[i]] = vowelsInString.reversed()[i]
+    for ch in s {
+        result.append(ch.isVowel ? vowelsStack.removeLast() : ch)
     }
 
     return String(result)
 }
-
-print(reverseVowels("aA"))
