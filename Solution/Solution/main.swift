@@ -7,5 +7,7 @@
 
 import Foundation
 
-print("Hello, World!")
-
+func reverseWords(_ s: String) -> String {
+    var result = s.split(separator: " ")
+    return result.reversed().joined(separator: " ")
+}
