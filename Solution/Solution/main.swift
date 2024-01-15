@@ -8,23 +8,17 @@
 import Foundation
 
 func increasingTriplet(_ nums: [Int]) -> Bool {
-    var i = 1
-    var previousValue = nums[0]
-    var sequenceLength = 1
+    var small = Int.max
+    var medium = Int.max
 
-    while sequenceLength < 3 && i < nums.count {
-        if nums[i] > previousValue {
-            sequenceLength += 1
-        } else {
-            sequenceLength = 1
+    for num in nums {
+        if num <= small {
+            small = num
+        } else if num <= medium {
+            medium = num
+        } else if num > medium {
+            return true
         }
-        previousValue = nums[i]
-        i += 1
     }
-
-    return (sequenceLength == 3) ? true : false
+    return false
 }
-
-var nums = [2,1,5,0,4,6]
-//var nums = [5,4,3,2,1]
-print(increasingTriplet(nums))
